@@ -81,11 +81,16 @@ contexts:
         - match: $
           pop: true
   settings-boolean:
-    - match: '^\s*(set)\s+(dotenv-load|export|positional-arguments)\s+(true|false)'
-      captures:
-        1: support.function.export.just
-        2: entity.other.attribute-name.just
-        3: constant.language.boolean.just
+    - match: '^\s*(set)\s+'
+      scope: support.function.export.just
+      set:
+        - match: '(allow-duplicate-recipes|dotenv-load|export|positional-arguments|windows-powershell)\s*'
+          scope: entity.other.attribute-name.just
+          set:
+            - match: '(:=)\s+(true|false)'
+              captures:
+                1: keyword.operator.assignment.just
+                2: constant.language.boolean.just
   strings:
     - match: '`'
       push:
