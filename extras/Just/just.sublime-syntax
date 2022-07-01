@@ -21,6 +21,7 @@ contexts:
     - include: recipeContent
     - include: functions
     - include: keywords
+    - include: settings-boolean
   assignments:
     - match: '^(export\s+)?({{validName}})\s*(:=)'
       captures:
@@ -70,6 +71,12 @@ contexts:
         - meta_scope: support.type.property-name.just
         - match: $
           pop: true
+  settings-boolean:
+    - match: '^\s*(set)\s+(dotenv-load|export|positional-arguments)\s+(true|false)'
+      captures:
+        1: support.function.export.just
+        2: entity.other.attribute-name.just
+        3: constant.language.boolean.just
   strings:
     - match: '`'
       push:
