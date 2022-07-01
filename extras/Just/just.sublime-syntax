@@ -25,13 +25,13 @@ contexts:
   assignments:
     - match: '^(export\s+)?({{validName}})\s*(:=)'
       captures:
-        1: keyword.control.just
+        1: keyword.declaration.variable.just
         2: variable.other.just
         3: keyword.operator.assignment.just
   aliases:
     - match: '^\s*(alias)\s+({{validName}})\s*(:=)\s+({{validName}}).*$'
       captures:
-        1: keyword.control.just
+        1: support.function.export.just
         2: variable.other.just
         3: keyword.operator.assignment.just
         4: entity.name.function.just
