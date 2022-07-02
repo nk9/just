@@ -24,19 +24,13 @@ contexts:
     - include: interpolate
     - include: comments
     - include: scripts
-    - include: strings
     - include: assignments
-    - include: recipeDefinition
-    - include: recipeContent
+    - include: strings
     - include: functions
     - include: keywords
+    - include: recipeDefinition
+    - include: recipeContent
     - include: concatenation
-
-  # Remove the current stack item when we're about to reach a new character
-  # Learn more: https://github.com/sublimehq/Packages/issues/757#issuecomment-287193733
-  else-pop:
-    - match: (?=\S)
-      pop: true
 
   assignments:
     - match: '^(export\s+)?({{validName}})\s*(:=)'
@@ -70,17 +64,64 @@ contexts:
     - match: '\+'
       scope: keyword.operator.arithmetic.just
 
+  #
+  # Recipe definition lines, including arguments and prerequisites
+  #
   recipeDefinition:
-    - match: '^(@)?({{validName}})\s*([\+\*])?([a-zA-Z0-9_]*)?\s*(=)?\s*([a-zA-Z0-9_`''"-]*)(:)([\sa-zA-Z0-9_-]*).*$'
-      captures:
-        1: storage.modifier.just
-        2: entity.name.function.just
-        3: keyword.operator.just
-        4: variable.parameter.just
-        5: keyword.operator.just
-        6: string.interpolated.just
-        7: keyword.operator.assignment
-        8: string.unquoted.just
+    - match: '(?=^@?{{validName}})'
+      scope: entity.name.function.just
+      push:
+        - recipePrerequisites
+        - recipeAssignment
+        - recipeArgument
+        - recipeName
+        - recipeModifier
+  recipeModifier:
+    - match: '^@'
+      scope: storage.modifier.just
+    - include: else-pop
+  recipeAssignment:
+    - match: ':'
+      scope: keyword.operator.assignment.just
+    - include: eol-pop
+    - include: else-pop
+  recipeName:
+    - match: '\b{{validName}}\b'
+      scope: entity.name.function.just
+      pop: true # Only match the first instance
+    - include: else-pop
+  recipeArgument:
+    - meta_scope: meta.function-call.arguments.just
+    - match: '(?=[\+\*a-zA-Z_])'
+      push:
+        - recipeArgumentAssignment
+        - recipeArgumentName
+        - recipeVariadicOperator
+    - include: else-pop
+  recipeVariadicOperator:
+    - match: '[\+\*]'
+      scope: keyword.operator.just
+    - include: else-pop
+  recipeArgumentAssignment:
+    - match: '='
+      scope: keyword.operator.just
+      push:
+        - variableName
+        - recipeArgumentValueQuoted
+    - include: else-pop
+  recipeArgumentName:
+    - match: '\b{{validName}}\b'
+      scope: variable.parameter.just
+    - include: else-pop
+  recipeArgumentValueQuoted:
+    - include: strings
+    - include: else-pop
+
+  recipePrerequisites:
+    - match: '\b{{validName}}\b'
+      scope: string.unquoted.just
+    - include: eol-pop
+    - include: else-pop
   recipeContent:
     - match: '^\s+([!@-]*)'
       captures:
@@ -93,9 +134,11 @@ contexts:
         - match: $
           pop: true
 
+  #
   # "set" expressions like "set shell := ['zsh', '-cu']" and "set dotenv-load"
+  #
   settings:
-    - match: 'set'
+    - match: '\bset\b'
       scope: support.function.export.just
       push:
         - settings-boolean
@@ -133,6 +176,14 @@ contexts:
       scope: punctuation.section.brackets.end.just
       pop: true
     - include: strings
+
+  #
+  # General types used all over the place
+  #
+  variableName:
+    - match: '\b{{validName}}\b'
+      scope: variable.other.just
+    - include: else-pop
   strings:
     - match: '`'
       push:
@@ -153,3 +204,17 @@ contexts:
           scope: constant.character.escape.just
         - match: "'"
           pop: true
+
+  #
+  # Utilities
+  #
+
+  # Remove the current stack item when we're about to reach a new character
+  # Learn more: https://github.com/sublimehq/Packages/issues/757#issuecomment-287193733
+  else-pop:
+    - match: (?=\S)
+      pop: true
+  eol-pop:
+    - match: '$\n?'
+      pop: true
+
