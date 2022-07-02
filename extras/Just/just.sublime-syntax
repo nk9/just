@@ -19,6 +19,7 @@ variables:
 
 contexts:
   main:
+    - include: settings
     - include: aliases
     - include: interpolate
     - include: comments
@@ -29,7 +30,13 @@ contexts:
     - include: recipeContent
     - include: functions
     - include: keywords
-    - include: settings-boolean
+
+  # Remove the current stack item when we're about to reach a new character
+  # Learn more: https://github.com/sublimehq/Packages/issues/757#issuecomment-287193733
+  else-pop:
+    - match: (?=\S)
+      pop: true
+
   assignments:
     - match: '^(export\s+)?({{validName}})\s*(:=)'
       captures:
@@ -80,17 +87,47 @@ contexts:
         - meta_scope: support.type.property-name.just
         - match: $
           pop: true
-  settings-boolean:
-    - match: '^\s*(set)\s+'
+
+  # "set" expressions like "set shell := ['zsh', '-cu']" and "set dotenv-load"
+  settings:
+    - match: 'set'
       scope: support.function.export.just
-      set:
-        - match: '(allow-duplicate-recipes|dotenv-load|export|positional-arguments|windows-powershell)\s*'
-          scope: entity.other.attribute-name.just
-          set:
-            - match: '(:=)\s+(true|false)'
-              captures:
-                1: keyword.operator.assignment.just
-                2: constant.language.boolean.just
+      push:
+        - settings-boolean
+        - settings-shell
+  settings-boolean:
+    - match: '(allow-duplicate-recipes|dotenv-load|export|positional-arguments|windows-powershell)'
+      scope: entity.other.attribute-name.just
+      push:
+        - constant-boolean
+        - assignment-operator
+    - include: else-pop
+  settings-shell:
+    - match: '(shell|windows-shell)'
+      scope: entity.other.attribute-name.just
+      push:
+        - string-array
+        - assignment-operator
+    - include: else-pop
+  assignment-operator:
+    - match: ':='
+      scope: keyword.operator.assignment.just
+      pop: true
+    - include: else-pop
+  constant-boolean:
+    - match: '(true|false)'
+      scope: constant.language.boolean.just
+      pop: true
+    - include: else-pop
+  string-array:
+    - match: '\['
+      scope: punctuation.section.brackets.start.just
+    - match: ','
+      scope: punctuation.separator.parameters.just
+    - match: '\]'
+      scope: punctuation.section.brackets.end.just
+      pop: true
+    - include: strings
   strings:
     - match: '`'
       push:
