@@ -30,6 +30,7 @@ contexts:
     - include: recipeContent
     - include: functions
     - include: keywords
+    - include: concatenation
 
   # Remove the current stack item when we're about to reach a new character
   # Learn more: https://github.com/sublimehq/Packages/issues/757#issuecomment-287193733
@@ -65,6 +66,10 @@ contexts:
   keywords:
     - match: \b(if|else|while)\b
       scope: keyword.control.just
+  concatenation:
+    - match: '\+'
+      scope: keyword.operator.arithmetic.just
+
   recipeDefinition:
     - match: '^(@)?({{validName}})\s*([\+\*])?([a-zA-Z0-9_]*)?\s*(=)?\s*([a-zA-Z0-9_`''"-]*)(:)([\sa-zA-Z0-9_-]*).*$'
       captures:
