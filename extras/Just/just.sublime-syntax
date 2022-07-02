@@ -100,10 +100,14 @@ contexts:
     - match: '"'
       push:
         - meta_scope: string.quoted.double.just
+        - match: \\.
+          scope: constant.character.escape.just
         - match: '"'
           pop: true
     - match: "'"
       push:
         - meta_scope: string.quoted.single.just
+        - match: \\.
+          scope: constant.character.escape.just
         - match: "'"
           pop: true
