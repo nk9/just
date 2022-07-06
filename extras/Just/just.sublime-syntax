@@ -24,20 +24,14 @@ contexts:
     - include: interpolate
     - include: comments
     - include: scripts
-    - include: assignments
+    - include: assignment
     - include: strings
     - include: functions
     - include: keywords
-    - include: recipeDefinition
-    - include: recipeContent
+    - include: recipe-definition
+    - include: recipe-content
     - include: concatenation
 
-  assignments:
-    - match: '^(export\s+)?({{validName}})\s*(:=)'
-      captures:
-        1: keyword.declaration.variable.just
-        2: variable.other.just
-        3: keyword.operator.assignment.just
   aliases:
     - match: '^\s*(alias)\s+({{validName}})\s*(:=)\s+({{validName}}).*$'
       captures:
@@ -65,64 +59,103 @@ contexts:
       scope: keyword.operator.arithmetic.just
 
   #
+  # Variable Assignment
+  #
+  assignment:
+    - match: '(?=(export)?\s*\b{{validName}}\s*:=)'
+      push:
+        - expression-paren
+        - assignment-operator
+        - variable-name
+        - assignment-prefix
+  assignment-operator:
+    - match: ':='
+      scope: keyword.operator.assignment.just
+      pop: true # Only match the first instance
+    - include: else-pop
+  assignment-prefix:
+    - match: 'export'
+      scope: keyword.declaration.variable.just
+    - include: else-pop
+  assignment-value:
+    - match: '(?=[\(a-zA-Z_])'
+      push:
+        - variable-name
+        - expression-paren
+    - include: strings
+    - include: else-pop
+  expression-paren:
+    - meta_content_scope: meta.sequence.tuple.just
+    - match: '\('
+      scope: punctuation.section.parens.begin.just
+    - match: '\)'
+      scope: punctuation.section.parens.begin.just
+      pop: true
+    - include: variable-name
+    - include: concatenation
+    - include: strings
+    - include: else-pop
+
+
+
+  #
   # Recipe definition lines, including arguments and prerequisites
   #
-  recipeDefinition:
-    - match: '(?=^@?{{validName}})'
-      scope: entity.name.function.just
+  recipe-definition:
+    - match: '(?=^@?{{validName}}[^:]*:[^=])' # Matches 'recipeName:' but not 'varName :='
       push:
-        - recipePrerequisites
-        - recipeAssignment
-        - recipeArgument
-        - recipeName
-        - recipeModifier
-  recipeModifier:
+        - recipe-prerequisites
+        - recipe-assignment
+        - recipe-argument
+        - recipe-name
+        - recipe-modifier
+  recipe-modifier:
     - match: '^@'
       scope: storage.modifier.just
     - include: else-pop
-  recipeAssignment:
+  recipe-assignment:
     - match: ':'
       scope: keyword.operator.assignment.just
     - include: eol-pop
     - include: else-pop
-  recipeName:
+  recipe-name:
     - match: '\b{{validName}}\b'
       scope: entity.name.function.just
       pop: true # Only match the first instance
     - include: else-pop
-  recipeArgument:
+  recipe-argument:
     - meta_scope: meta.function-call.arguments.just
     - match: '(?=[\+\*a-zA-Z_])'
       push:
-        - recipeArgumentAssignment
-        - recipeArgumentName
-        - recipeVariadicOperator
+        - recipe-argument-assignment
+        - recipe-argument-name
+        - recipe-variadic-operator
     - include: else-pop
-  recipeVariadicOperator:
+  recipe-variadic-operator:
     - match: '[\+\*]'
       scope: keyword.operator.just
     - include: else-pop
-  recipeArgumentAssignment:
+  recipe-argument-assignment:
     - match: '='
       scope: keyword.operator.just
       push:
-        - variableName
-        - recipeArgumentValueQuoted
+        - variable-name
+        - recipe-argument-value-quoted
     - include: else-pop
-  recipeArgumentName:
+  recipe-argument-name:
     - match: '\b{{validName}}\b'
       scope: variable.parameter.just
     - include: else-pop
-  recipeArgumentValueQuoted:
+  recipe-argument-value-quoted:
     - include: strings
     - include: else-pop
 
-  recipePrerequisites:
+  recipe-prerequisites:
     - match: '\b{{validName}}\b'
       scope: string.unquoted.just
     - include: eol-pop
     - include: else-pop
-  recipeContent:
+  recipe-content:
     - match: '^\s+([!@-]*)'
       captures:
         1: storage.modifier.just
@@ -157,11 +190,6 @@ contexts:
         - string-array
         - assignment-operator
     - include: else-pop
-  assignment-operator:
-    - match: ':='
-      scope: keyword.operator.assignment.just
-      pop: true
-    - include: else-pop
   constant-boolean:
     - match: '(true|false)'
       scope: constant.language.boolean.just
@@ -180,7 +208,7 @@ contexts:
   #
   # General types used all over the place
   #
-  variableName:
+  variable-name:
     - match: '\b{{validName}}\b'
       scope: variable.other.just
     - include: else-pop
