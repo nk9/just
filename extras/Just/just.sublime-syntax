@@ -40,8 +40,13 @@ contexts:
         3: keyword.operator.assignment.just
         4: entity.name.function.just
   comments:
-    - match: '#[^!].*'
-      scope: comment.line.just
+    # Copied from examples thread: https://github.com/sublimehq/Packages/issues/757#issuecomment-326882205
+    - match: '#[^!]'
+      scope: punctuation.definition.comment.just
+      push:
+        - meta_scope: comment.line.number-sign.just
+        - match: $\n? # Consume the newline so that completions aren't shown at the end of the line when typing comments
+          pop: true
   interpolate:
     - match: '(?<!\{)\{\{(?!\{)'
       push:
