@@ -59,6 +59,12 @@ for:
     echo $file; \
   done
 
+while:
+  #!/usr/bin/env sh
+  while `server-is-dead`; do
+    ping -c 1 server
+  done  
+
 serve:
   touch {{tmpdir}}/file
 
@@ -72,7 +78,7 @@ stuff := ```
 an_arch := trim(lowercase(justfile())) + arch()
 trim_end := trim_end("99.99954%   ")
 home_dir := replace(env_var('HOME') / "yep", 'yep', '')
-quoted := quote("some things beyond\"$()^%#@!|-+=_*&'`")
+quoted := quote("some things beyond\"$()^%#@!|-+=_*&'`") # NB: Not prematurely commented
 smartphone := trim_end_match('blah.txt', 'txt')
 museum := trim_start_match(trim_start(trim_end_matches('   yep_blah.txt.txt', '.txt')), 'yep_')
 water := trim_start_matches('ssssssoup.txt', 's')
@@ -102,6 +108,8 @@ foo_c := if "hello" == "goodbye" {
 } else {
   "123"
 }
+
+if_operand := if if "a" == "a" {"b"} else {"c"} == "b" {"d"} else {"e"}
 
 bar:
   @echo {{foo}}
@@ -169,10 +177,10 @@ braces:
 _braces2:
   echo '{{'I {{LOVE}} curly braces!'}}'
 
-_braces3:
+@_braces3:
   echo 'I {{ "{{" }}LOVE}} curly braces!'
 
-foo2:
+foo2: (script2 "str" foo) && d
   -@cat foo
   echo 'Done!'
 
