@@ -2,8 +2,8 @@ set shell := ["sh", "-c"]
 set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
 set allow-duplicate-recipes
 set positional-arguments
-set dotenv-load
-set export
+set dotenv-load := true
+set export := false
 
 alias s := serve
 
@@ -153,6 +153,14 @@ shebang:
 	}
 	echo "PowerShell $psver"
 
+shebang-:
+  #!/bin/sh
+  echo "Hello from Bourne Shell"
+
+shebang-python:
+  #!/usr/bin/python3
+  print("Hello from Python")
+
 @foo:
   echo bar
 
@@ -168,7 +176,7 @@ notify m="":
 	keybase chat send --topic-type "chat" --channel <channel> <team> "upd(<repo>): {{m}}"
 
 # Sample project script 2
-script2 *ARGS:
+script2 +ARGS:
     {{ python }} script2.py {{ ARGS }}
 
 braces:
@@ -188,7 +196,7 @@ test3 target tests=path_1:
   @echo 'Testing {{target}}:{{tests}}…'
   ./test --tests {{tests}} {{target}}
 
-test4 triple=(an_arch + "-unknown-unknown") input=(an_arch / "input.dat"):
+test4 triple=(an_arch + "-unknown-unknown") *$input=(an_arch / "input.dat"):
   ./test {{triple}}
 
 variadic $VAR1_1 VAR2 VAR3 VAR4=("a") +$FLAGS='-q': foo2 braces
