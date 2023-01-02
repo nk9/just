@@ -396,11 +396,13 @@ export PATH=&quot;$PATH:$HOME/bin&quot;
 just --help
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="github-actions"><a class="header" href="#github-actions">GitHub Actions</a></h3>
-<p><a href="https://github.com/extractions/setup-just">extractions/setup-just</a> can be used to install <code>just</code> in a GitHub Actions workflow.</p>
-<p>Example usage:</p>
+<p>With <a href="https://github.com/extractions/setup-just">extractions/setup-just</a>:</p>
 <pre><code class="language-yaml">- uses: extractions/setup-just@v1
   with:
     just-version: 0.8 # optional semver specification, otherwise latest
+</code></pre>
+<p>With <a href="https://github.com/taiki-e/install-action">taiki-e/install-action</a>:</p>
+<pre><code class="language-yaml">- uses: taiki-e/install-action@just
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="release-rss-feed"><a class="header" href="#release-rss-feed">Release RSS Feed</a></h3>
 <p>An <a href="https://en.wikipedia.org/wiki/RSS">RSS feed</a> of <code>just</code> releases is available <a href="https://github.com/casey/just/releases.atom">here</a>.</p>
@@ -466,7 +468,7 @@ augroup END
 <div style="break-before: page; page-break-before: always;"></div><h3 id="kakoune"><a class="header" href="#kakoune">Kakoune</a></h3>
 <p>Kakoune supports <code>justfile</code> syntax highlighting out of the box, thanks to TeddyDD.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="sublime-text"><a class="header" href="#sublime-text">Sublime Text</a></h3>
-<p>A syntax file for Sublime Text written by TonioGela is available in <a href="https://github.com/casey/just/blob/master/extras/just.sublime-syntax">extras/just.sublime-syntax</a>.</p>
+<p>The <a href="https://github.com/nk9/just_sublime">Just package</a> by <a href="https://github.com/nk9">nk9</a> with <code>just</code> syntax and some other tools is available on <a href="https://packagecontrol.io/packages/Just">PackageControl</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="other-editors"><a class="header" href="#other-editors">Other Editors</a></h3>
 <p>Feel free to send me the commands necessary to get syntax highlighting working in your editor of choice so that I may include them here.</p>
 <div style="break-before: page; page-break-before: always;"></div><h2 id="quick-start"><a class="header" href="#quick-start">Quick Start</a></h2>
@@ -874,7 +876,7 @@ y := &quot;&quot;&quot;
   xyz
 &quot;&quot;&quot;
 </code></pre>
-<p>Similar to unindented strings, indented double-quoted strings process escape sequences, and indented single-quoted strings ignore escape sequences. Escape sequence processing takes place after unindentation. The unindention algorithm does not take escape-sequence produced whitespace or newlines into account.</p>
+<p>Similar to unindented strings, indented double-quoted strings process escape sequences, and indented single-quoted strings ignore escape sequences. Escape sequence processing takes place after unindentation. The unindentation algorithm does not take escape-sequence produced whitespace or newlines into account.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="ignoring-errors"><a class="header" href="#ignoring-errors">Ignoring Errors</a></h3>
 <p>Normally, if a command returns a non-zero exit status, execution will stop. To continue execution after a command, even if it fails, prefix the command with <code>-</code>:</p>
 <pre><code class="language-just">foo:
@@ -1046,7 +1048,7 @@ directory that contains the <code>justfile</code>. This can be disabled using th
 <code>[no-cd]</code> attribute. This can be used to create recipes which use paths
 relative to the invocation directory, or which operate on the current
 directory.</p>
-<p>For exmaple, this <code>commit</code> recipe:</p>
+<p>For example, this <code>commit</code> recipe:</p>
 <pre><code class="language-just">[no-cd]
 commit file:
   git add {{file}}
@@ -1196,7 +1198,7 @@ HOME is '/home/myuser'
 </code></pre>
 <h4 id="loading-environment-variables-from-a-env-file"><a class="header" href="#loading-environment-variables-from-a-env-file">Loading Environment Variables from a <code>.env</code> File</a></h4>
 <p><code>just</code> will load environment variables from a <code>.env</code> file if <a href="chapter_24.html#dotenv-load">dotenv-load</a> is set. The variables in the file will be available as environment variables to the recipes. See <a href="chapter_26.html">dotenv-integration</a> for more information.</p>
-<h4 id="setting-just-variables-from-environments-variables"><a class="header" href="#setting-just-variables-from-environments-variables">Setting <code>just</code> Variables from Environments Variables</a></h4>
+<h4 id="setting-just-variables-from-environment-variables"><a class="header" href="#setting-just-variables-from-environment-variables">Setting <code>just</code> Variables from Environment Variables</a></h4>
 <p>Environment variables can be propagated to <code>just</code> variables using the functions <code>env_var()</code> and <code>env_var_or_default()</code>.
 See <a href="chapter_30.html#environment-variables">environment-variables</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="recipe-parameters"><a class="header" href="#recipe-parameters">Recipe Parameters</a></h3>
@@ -1568,7 +1570,7 @@ Available recipes:
 <pre><code class="language-sh">$ just --summary
 test
 </code></pre>
-<p>The <code>[private]</code> attribute<sup>master</sup> may also be used to hide recipes or aliases without needing to change the name:</p>
+<p>The <code>[private]</code> attribute<sup>1.10.0</sup> may also be used to hide recipes or aliases without needing to change the name:</p>
 <pre><code class="language-just">[private]
 foo:
 
