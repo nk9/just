@@ -33,6 +33,7 @@
 
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
         <script>
             var path_to_root = "";
@@ -70,10 +71,12 @@
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
             var html = document.querySelector('html');
-            var sidebar = 'hidden';
+            var sidebar = null;
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
             }
             html.classList.remove('sidebar-visible');
             html.classList.add("sidebar-" + sidebar);
@@ -81,16 +84,38 @@
 
         <nav id="sidebar" class="sidebar" aria-label="Table of contents">
             <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">1.1.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">1.1.2.</strong> Packages</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">1.1.3.</strong> Pre-Built Binaries</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">1.1.4.</strong> GitHub Actions</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">1.1.5.</strong> Release RSS Feed</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">1.1.6.</strong> Node.js Installation</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">1.2.</strong> Backwards Compatibility</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">1.3.</strong> Editor Support</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">1.3.1.</strong> Vim and Neovim</a></li><li class="chapter-item expanded "><a href="chapter_12.html"><strong aria-hidden="true">1.3.2.</strong> Emacs</a></li><li class="chapter-item expanded "><a href="chapter_13.html"><strong aria-hidden="true">1.3.3.</strong> Visual Studio Code</a></li><li class="chapter-item expanded "><a href="chapter_14.html"><strong aria-hidden="true">1.3.4.</strong> JetBrains IDEs</a></li><li class="chapter-item expanded "><a href="chapter_15.html"><strong aria-hidden="true">1.3.5.</strong> Kakoune</a></li><li class="chapter-item expanded "><a href="chapter_16.html"><strong aria-hidden="true">1.3.6.</strong> Sublime Text</a></li><li class="chapter-item expanded "><a href="chapter_17.html"><strong aria-hidden="true">1.3.7.</strong> Other Editors</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_18.html"><strong aria-hidden="true">1.4.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="chapter_19.html"><strong aria-hidden="true">1.5.</strong> Examples</a></li><li class="chapter-item expanded "><a href="chapter_20.html"><strong aria-hidden="true">1.6.</strong> Features</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_21.html"><strong aria-hidden="true">1.6.1.</strong> The Default Recipe</a></li><li class="chapter-item expanded "><a href="chapter_22.html"><strong aria-hidden="true">1.6.2.</strong> Listing Available Recipes</a></li><li class="chapter-item expanded "><a href="chapter_23.html"><strong aria-hidden="true">1.6.3.</strong> Aliases</a></li><li class="chapter-item expanded "><a href="chapter_24.html"><strong aria-hidden="true">1.6.4.</strong> Settings</a></li><li class="chapter-item expanded "><a href="chapter_25.html"><strong aria-hidden="true">1.6.5.</strong> Documentation Comments</a></li><li class="chapter-item expanded "><a href="chapter_26.html"><strong aria-hidden="true">1.6.6.</strong> Dotenv Integration</a></li><li class="chapter-item expanded "><a href="chapter_27.html"><strong aria-hidden="true">1.6.7.</strong> Variables and Substitution</a></li><li class="chapter-item expanded "><a href="chapter_28.html"><strong aria-hidden="true">1.6.8.</strong> Strings</a></li><li class="chapter-item expanded "><a href="chapter_29.html"><strong aria-hidden="true">1.6.9.</strong> Ignoring Errors</a></li><li class="chapter-item expanded "><a href="chapter_30.html"><strong aria-hidden="true">1.6.10.</strong> Functions</a></li><li class="chapter-item expanded "><a href="chapter_31.html"><strong aria-hidden="true">1.6.11.</strong> Recipe Attributes</a></li><li class="chapter-item expanded "><a href="chapter_32.html"><strong aria-hidden="true">1.6.12.</strong> Command Evaluation Using Backticks</a></li><li class="chapter-item expanded "><a href="chapter_33.html"><strong aria-hidden="true">1.6.13.</strong> Conditional Expressions</a></li><li class="chapter-item expanded "><a href="chapter_34.html"><strong aria-hidden="true">1.6.14.</strong> Stopping execution with error</a></li><li class="chapter-item expanded "><a href="chapter_35.html"><strong aria-hidden="true">1.6.15.</strong> Setting Variables from the Command Line</a></li><li class="chapter-item expanded "><a href="chapter_36.html"><strong aria-hidden="true">1.6.16.</strong> Getting and Setting Environment Variables</a></li><li class="chapter-item expanded "><a href="chapter_37.html"><strong aria-hidden="true">1.6.17.</strong> Recipe Parameters</a></li><li class="chapter-item expanded "><a href="chapter_38.html"><strong aria-hidden="true">1.6.18.</strong> Running Recipes at the End of a Recipe</a></li><li class="chapter-item expanded "><a href="chapter_39.html"><strong aria-hidden="true">1.6.19.</strong> Running Recipes in the Middle of a Recipe</a></li><li class="chapter-item expanded "><a href="chapter_40.html"><strong aria-hidden="true">1.6.20.</strong> Writing Recipes in Other Languages</a></li><li class="chapter-item expanded "><a href="chapter_41.html"><strong aria-hidden="true">1.6.21.</strong> Safer Bash Shebang Recipes</a></li><li class="chapter-item expanded "><a href="chapter_42.html"><strong aria-hidden="true">1.6.22.</strong> Setting Variables in a Recipe</a></li><li class="chapter-item expanded "><a href="chapter_43.html"><strong aria-hidden="true">1.6.23.</strong> Sharing Environment Variables Between Recipes</a></li><li class="chapter-item expanded "><a href="chapter_44.html"><strong aria-hidden="true">1.6.24.</strong> Changing the Working Directory in a Recipe</a></li><li class="chapter-item expanded "><a href="chapter_45.html"><strong aria-hidden="true">1.6.25.</strong> Indentation</a></li><li class="chapter-item expanded "><a href="chapter_46.html"><strong aria-hidden="true">1.6.26.</strong> Multi-Line Constructs</a></li><li class="chapter-item expanded "><a href="chapter_47.html"><strong aria-hidden="true">1.6.27.</strong> Command Line Options</a></li><li class="chapter-item expanded "><a href="chapter_48.html"><strong aria-hidden="true">1.6.28.</strong> Private Recipes</a></li><li class="chapter-item expanded "><a href="chapter_49.html"><strong aria-hidden="true">1.6.29.</strong> Quiet Recipes</a></li><li class="chapter-item expanded "><a href="chapter_50.html"><strong aria-hidden="true">1.6.30.</strong> Selecting Recipes to Run With an Interactive Chooser</a></li><li class="chapter-item expanded "><a href="chapter_51.html"><strong aria-hidden="true">1.6.31.</strong> Invoking justfiles in Other Directories</a></li><li class="chapter-item expanded "><a href="chapter_52.html"><strong aria-hidden="true">1.6.32.</strong> Hiding justfiles</a></li><li class="chapter-item expanded "><a href="chapter_53.html"><strong aria-hidden="true">1.6.33.</strong> Just Scripts</a></li><li class="chapter-item expanded "><a href="chapter_54.html"><strong aria-hidden="true">1.6.34.</strong> Dumping justfiles as JSON</a></li><li class="chapter-item expanded "><a href="chapter_55.html"><strong aria-hidden="true">1.6.35.</strong> Falling back to parent justfiles</a></li><li class="chapter-item expanded "><a href="chapter_56.html"><strong aria-hidden="true">1.6.36.</strong> Avoiding Argument Splitting</a></li><li class="chapter-item expanded "><a href="chapter_57.html"><strong aria-hidden="true">1.6.37.</strong> Configuring the Shell</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_58.html"><strong aria-hidden="true">1.7.</strong> Changelog</a></li><li class="chapter-item expanded "><a href="chapter_59.html"><strong aria-hidden="true">1.8.</strong> Miscellanea</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_60.html"><strong aria-hidden="true">1.8.1.</strong> Companion Tools</a></li><li class="chapter-item expanded "><a href="chapter_61.html"><strong aria-hidden="true">1.8.2.</strong> Shell Alias</a></li><li class="chapter-item expanded "><a href="chapter_62.html"><strong aria-hidden="true">1.8.3.</strong> Shell Completion Scripts</a></li><li class="chapter-item expanded "><a href="chapter_63.html"><strong aria-hidden="true">1.8.4.</strong> Grammar</a></li><li class="chapter-item expanded "><a href="chapter_64.html"><strong aria-hidden="true">1.8.5.</strong> just.sh</a></li><li class="chapter-item expanded "><a href="chapter_65.html"><strong aria-hidden="true">1.8.6.</strong> User justfiles</a></li><li class="chapter-item expanded "><a href="chapter_66.html"><strong aria-hidden="true">1.8.7.</strong> Node.js package.json Script Compatibility</a></li><li class="chapter-item expanded "><a href="chapter_67.html"><strong aria-hidden="true">1.8.8.</strong> Alternatives and Prior Art</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_68.html"><strong aria-hidden="true">1.9.</strong> Contributing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_69.html"><strong aria-hidden="true">1.9.1.</strong> Janus</a></li><li class="chapter-item expanded "><a href="chapter_70.html"><strong aria-hidden="true">1.9.2.</strong> Minimum Supported Rust Version</a></li><li class="chapter-item expanded "><a href="chapter_71.html"><strong aria-hidden="true">1.9.3.</strong> New Releases</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_72.html"><strong aria-hidden="true">1.10.</strong> Frequently Asked Questions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_73.html"><strong aria-hidden="true">1.10.1.</strong> What are the idiosyncrasies of Make that Just avoids?</a></li><li class="chapter-item expanded "><a href="chapter_74.html"><strong aria-hidden="true">1.10.2.</strong> What’s the relationship between Just and Cargo build scripts?</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_75.html"><strong aria-hidden="true">1.11.</strong> Further Ramblings</a></li></ol></li></ol>
+                <ol class="chapter"><li class="chapter-item expanded "><a href="chapter_1.html"><strong aria-hidden="true">1.</strong> Introduction</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_2.html"><strong aria-hidden="true">1.1.</strong> Installation</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_3.html"><strong aria-hidden="true">1.1.1.</strong> Prerequisites</a></li><li class="chapter-item expanded "><a href="chapter_4.html"><strong aria-hidden="true">1.1.2.</strong> Packages</a></li><li class="chapter-item expanded "><a href="chapter_5.html"><strong aria-hidden="true">1.1.3.</strong> Pre-Built Binaries</a></li><li class="chapter-item expanded "><a href="chapter_6.html"><strong aria-hidden="true">1.1.4.</strong> GitHub Actions</a></li><li class="chapter-item expanded "><a href="chapter_7.html"><strong aria-hidden="true">1.1.5.</strong> Release RSS Feed</a></li><li class="chapter-item expanded "><a href="chapter_8.html"><strong aria-hidden="true">1.1.6.</strong> Node.js Installation</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_9.html"><strong aria-hidden="true">1.2.</strong> Backwards Compatibility</a></li><li class="chapter-item expanded "><a href="chapter_10.html"><strong aria-hidden="true">1.3.</strong> Editor Support</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_11.html"><strong aria-hidden="true">1.3.1.</strong> Vim and Neovim</a></li><li class="chapter-item expanded "><a href="chapter_12.html"><strong aria-hidden="true">1.3.2.</strong> Emacs</a></li><li class="chapter-item expanded "><a href="chapter_13.html"><strong aria-hidden="true">1.3.3.</strong> Visual Studio Code</a></li><li class="chapter-item expanded "><a href="chapter_14.html"><strong aria-hidden="true">1.3.4.</strong> JetBrains IDEs</a></li><li class="chapter-item expanded "><a href="chapter_15.html"><strong aria-hidden="true">1.3.5.</strong> Kakoune</a></li><li class="chapter-item expanded "><a href="chapter_16.html"><strong aria-hidden="true">1.3.6.</strong> Helix</a></li><li class="chapter-item expanded "><a href="chapter_17.html"><strong aria-hidden="true">1.3.7.</strong> Sublime Text</a></li><li class="chapter-item expanded "><a href="chapter_18.html"><strong aria-hidden="true">1.3.8.</strong> Other Editors</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_19.html"><strong aria-hidden="true">1.4.</strong> Quick Start</a></li><li class="chapter-item expanded "><a href="chapter_20.html"><strong aria-hidden="true">1.5.</strong> Examples</a></li><li class="chapter-item expanded "><a href="chapter_21.html"><strong aria-hidden="true">1.6.</strong> Features</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_22.html"><strong aria-hidden="true">1.6.1.</strong> The Default Recipe</a></li><li class="chapter-item expanded "><a href="chapter_23.html"><strong aria-hidden="true">1.6.2.</strong> Listing Available Recipes</a></li><li class="chapter-item expanded "><a href="chapter_24.html"><strong aria-hidden="true">1.6.3.</strong> Aliases</a></li><li class="chapter-item expanded "><a href="chapter_25.html"><strong aria-hidden="true">1.6.4.</strong> Settings</a></li><li class="chapter-item expanded "><a href="chapter_26.html"><strong aria-hidden="true">1.6.5.</strong> Documentation Comments</a></li><li class="chapter-item expanded "><a href="chapter_27.html"><strong aria-hidden="true">1.6.6.</strong> Dotenv Integration</a></li><li class="chapter-item expanded "><a href="chapter_28.html"><strong aria-hidden="true">1.6.7.</strong> Variables and Substitution</a></li><li class="chapter-item expanded "><a href="chapter_29.html"><strong aria-hidden="true">1.6.8.</strong> Strings</a></li><li class="chapter-item expanded "><a href="chapter_30.html"><strong aria-hidden="true">1.6.9.</strong> Ignoring Errors</a></li><li class="chapter-item expanded "><a href="chapter_31.html"><strong aria-hidden="true">1.6.10.</strong> Functions</a></li><li class="chapter-item expanded "><a href="chapter_32.html"><strong aria-hidden="true">1.6.11.</strong> Recipe Attributes</a></li><li class="chapter-item expanded "><a href="chapter_33.html"><strong aria-hidden="true">1.6.12.</strong> Command Evaluation Using Backticks</a></li><li class="chapter-item expanded "><a href="chapter_34.html"><strong aria-hidden="true">1.6.13.</strong> Conditional Expressions</a></li><li class="chapter-item expanded "><a href="chapter_35.html"><strong aria-hidden="true">1.6.14.</strong> Stopping execution with error</a></li><li class="chapter-item expanded "><a href="chapter_36.html"><strong aria-hidden="true">1.6.15.</strong> Setting Variables from the Command Line</a></li><li class="chapter-item expanded "><a href="chapter_37.html"><strong aria-hidden="true">1.6.16.</strong> Getting and Setting Environment Variables</a></li><li class="chapter-item expanded "><a href="chapter_38.html"><strong aria-hidden="true">1.6.17.</strong> Recipe Parameters</a></li><li class="chapter-item expanded "><a href="chapter_39.html"><strong aria-hidden="true">1.6.18.</strong> Running Recipes at the End of a Recipe</a></li><li class="chapter-item expanded "><a href="chapter_40.html"><strong aria-hidden="true">1.6.19.</strong> Running Recipes in the Middle of a Recipe</a></li><li class="chapter-item expanded "><a href="chapter_41.html"><strong aria-hidden="true">1.6.20.</strong> Writing Recipes in Other Languages</a></li><li class="chapter-item expanded "><a href="chapter_42.html"><strong aria-hidden="true">1.6.21.</strong> Safer Bash Shebang Recipes</a></li><li class="chapter-item expanded "><a href="chapter_43.html"><strong aria-hidden="true">1.6.22.</strong> Setting Variables in a Recipe</a></li><li class="chapter-item expanded "><a href="chapter_44.html"><strong aria-hidden="true">1.6.23.</strong> Sharing Environment Variables Between Recipes</a></li><li class="chapter-item expanded "><a href="chapter_45.html"><strong aria-hidden="true">1.6.24.</strong> Changing the Working Directory in a Recipe</a></li><li class="chapter-item expanded "><a href="chapter_46.html"><strong aria-hidden="true">1.6.25.</strong> Indentation</a></li><li class="chapter-item expanded "><a href="chapter_47.html"><strong aria-hidden="true">1.6.26.</strong> Multi-Line Constructs</a></li><li class="chapter-item expanded "><a href="chapter_48.html"><strong aria-hidden="true">1.6.27.</strong> Command Line Options</a></li><li class="chapter-item expanded "><a href="chapter_49.html"><strong aria-hidden="true">1.6.28.</strong> Private Recipes</a></li><li class="chapter-item expanded "><a href="chapter_50.html"><strong aria-hidden="true">1.6.29.</strong> Quiet Recipes</a></li><li class="chapter-item expanded "><a href="chapter_51.html"><strong aria-hidden="true">1.6.30.</strong> Selecting Recipes to Run With an Interactive Chooser</a></li><li class="chapter-item expanded "><a href="chapter_52.html"><strong aria-hidden="true">1.6.31.</strong> Invoking justfiles in Other Directories</a></li><li class="chapter-item expanded "><a href="chapter_53.html"><strong aria-hidden="true">1.6.32.</strong> Include Directives</a></li><li class="chapter-item expanded "><a href="chapter_54.html"><strong aria-hidden="true">1.6.33.</strong> Hiding justfiles</a></li><li class="chapter-item expanded "><a href="chapter_55.html"><strong aria-hidden="true">1.6.34.</strong> Just Scripts</a></li><li class="chapter-item expanded "><a href="chapter_56.html"><strong aria-hidden="true">1.6.35.</strong> Formatting and dumping justfiles</a></li><li class="chapter-item expanded "><a href="chapter_57.html"><strong aria-hidden="true">1.6.36.</strong> Fallback to parent justfiles</a></li><li class="chapter-item expanded "><a href="chapter_58.html"><strong aria-hidden="true">1.6.37.</strong> Avoiding Argument Splitting</a></li><li class="chapter-item expanded "><a href="chapter_59.html"><strong aria-hidden="true">1.6.38.</strong> Configuring the Shell</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_60.html"><strong aria-hidden="true">1.7.</strong> Changelog</a></li><li class="chapter-item expanded "><a href="chapter_61.html"><strong aria-hidden="true">1.8.</strong> Miscellanea</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_62.html"><strong aria-hidden="true">1.8.1.</strong> Companion Tools</a></li><li class="chapter-item expanded "><a href="chapter_63.html"><strong aria-hidden="true">1.8.2.</strong> Shell Alias</a></li><li class="chapter-item expanded "><a href="chapter_64.html"><strong aria-hidden="true">1.8.3.</strong> Shell Completion Scripts</a></li><li class="chapter-item expanded "><a href="chapter_65.html"><strong aria-hidden="true">1.8.4.</strong> Grammar</a></li><li class="chapter-item expanded "><a href="chapter_66.html"><strong aria-hidden="true">1.8.5.</strong> just.sh</a></li><li class="chapter-item expanded "><a href="chapter_67.html"><strong aria-hidden="true">1.8.6.</strong> User justfiles</a></li><li class="chapter-item expanded "><a href="chapter_68.html"><strong aria-hidden="true">1.8.7.</strong> Node.js package.json Script Compatibility</a></li><li class="chapter-item expanded "><a href="chapter_69.html"><strong aria-hidden="true">1.8.8.</strong> Alternatives and Prior Art</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_70.html"><strong aria-hidden="true">1.9.</strong> Contributing</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_71.html"><strong aria-hidden="true">1.9.1.</strong> Janus</a></li><li class="chapter-item expanded "><a href="chapter_72.html"><strong aria-hidden="true">1.9.2.</strong> Minimum Supported Rust Version</a></li><li class="chapter-item expanded "><a href="chapter_73.html"><strong aria-hidden="true">1.9.3.</strong> New Releases</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_74.html"><strong aria-hidden="true">1.10.</strong> Frequently Asked Questions</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="chapter_75.html"><strong aria-hidden="true">1.10.1.</strong> What are the idiosyncrasies of Make that Just avoids?</a></li><li class="chapter-item expanded "><a href="chapter_76.html"><strong aria-hidden="true">1.10.2.</strong> What’s the relationship between Just and Cargo build scripts?</a></li></ol></li><li class="chapter-item expanded "><a href="chapter_77.html"><strong aria-hidden="true">1.11.</strong> Further Ramblings</a></li></ol></li></ol>
             </div>
             <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
 
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
                                 <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky bordered">
+                <div id="menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
                             <i class="fa fa-bars"></i>
@@ -178,31 +203,31 @@ Yay, all your tests passed!
 <p><code>just</code> has a ton of useful features, and many improvements over <code>make</code>:</p>
 <ul>
 <li>
-<p><code>just</code> is a command runner, not a build system, so it avoids much of <a href="chapter_73.html"><code>make</code>’s complexity and idiosyncrasies</a>. No need for <code>.PHONY</code> recipes!</p>
+<p><code>just</code> is a command runner, not a build system, so it avoids much of <a href="chapter_75.html"><code>make</code>’s complexity and idiosyncrasies</a>. No need for <code>.PHONY</code> recipes!</p>
 </li>
 <li>
-<p>Linux, MacOS, and Windows are supported with no additional dependencies. (Although if your system doesn’t have an <code>sh</code>, you’ll need to <a href="chapter_24.html#shell">choose a different shell</a>.)</p>
+<p>Linux, MacOS, and Windows are supported with no additional dependencies. (Although if your system doesn’t have an <code>sh</code>, you’ll need to <a href="chapter_25.html#shell">choose a different shell</a>.)</p>
 </li>
 <li>
 <p>Errors are specific and informative, and syntax errors are reported along with their source context.</p>
 </li>
 <li>
-<p>Recipes can accept <a href="chapter_37.html">command line arguments</a>.</p>
+<p>Recipes can accept <a href="chapter_38.html">command line arguments</a>.</p>
 </li>
 <li>
 <p>Wherever possible, errors are resolved statically. Unknown recipes and circular dependencies are reported before anything runs.</p>
 </li>
 <li>
-<p><code>just</code> <a href="chapter_26.html">loads <code>.env</code> files</a>, making it easy to populate environment variables.</p>
+<p><code>just</code> <a href="chapter_27.html">loads <code>.env</code> files</a>, making it easy to populate environment variables.</p>
 </li>
 <li>
-<p>Recipes can be <a href="chapter_22.html">listed from the command line</a>.</p>
+<p>Recipes can be <a href="chapter_23.html">listed from the command line</a>.</p>
 </li>
 <li>
-<p>Command line completion scripts are <a href="chapter_62.html">available for most popular shells</a>.</p>
+<p>Command line completion scripts are <a href="chapter_64.html">available for most popular shells</a>.</p>
 </li>
 <li>
-<p>Recipes can be written in <a href="chapter_40.html">arbitrary languages</a>, like Python or NodeJS.</p>
+<p>Recipes can be written in <a href="chapter_41.html">arbitrary languages</a>, like Python or NodeJS.</p>
 </li>
 <li>
 <p><code>just</code> can be invoked from any subdirectory, not just the directory that contains the <code>justfile</code>.</p>
@@ -395,6 +420,11 @@ export PATH=&quot;$PATH:$HOME/bin&quot;
 # just should now be executable
 just --help
 </code></pre>
+<p>Note that <code>install.sh</code> may fail on GitHub actions, or in other environments
+where many machines share IP addresses. <code>install.sh</code> calls GitHub APIs in order
+to determine the latest version of <code>just</code> to install, and those API calls are
+rate-limited on a per-IP basis. To make <code>install.sh</code> more reliable in such
+circumstances, pass a specific tag to install with <code>--tag</code>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="github-actions"><a class="header" href="#github-actions">GitHub Actions</a></h3>
 <p>With <a href="https://github.com/extractions/setup-just">extractions/setup-just</a>:</p>
 <pre><code class="language-yaml">- uses: extractions/setup-just@v1
@@ -467,6 +497,8 @@ augroup END
 <p>A plugin for JetBrains IDEs by <a href="https://github.com/linux-china">linux_china</a> is <a href="https://plugins.jetbrains.com/plugin/18658-just">available here</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="kakoune"><a class="header" href="#kakoune">Kakoune</a></h3>
 <p>Kakoune supports <code>justfile</code> syntax highlighting out of the box, thanks to TeddyDD.</p>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="helix"><a class="header" href="#helix">Helix</a></h3>
+<p><a href="https://helix-editor.com/">Helix</a> supports <code>justfile</code> syntax highlighting out-of-the-box since version 23.05.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="sublime-text"><a class="header" href="#sublime-text">Sublime Text</a></h3>
 <p>The <a href="https://github.com/nk9/just_sublime">Just package</a> by <a href="https://github.com/nk9">nk9</a> with <code>just</code> syntax and some other tools is available on <a href="https://packagecontrol.io/packages/Just">PackageControl</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="other-editors"><a class="header" href="#other-editors">Other Editors</a></h3>
@@ -623,15 +655,15 @@ foo:
 </code></pre>
 <h4 id="table-of-settings"><a class="header" href="#table-of-settings">Table of Settings</a></h4>
 <div class="table-wrapper"><table><thead><tr><th>Name</th><th>Value</th><th>Default</th><th>Description</th></tr></thead><tbody>
-<tr><td><code>allow-duplicate-recipes</code></td><td>boolean</td><td>False</td><td>Allow recipes appearing later in a <code>justfile</code> to override earlier recipes with the same name.</td></tr>
-<tr><td><code>dotenv-load</code></td><td>boolean</td><td>False</td><td>Load a <code>.env</code> file, if present.</td></tr>
-<tr><td><code>export</code></td><td>boolean</td><td>False</td><td>Export all variables as environment variables.</td></tr>
-<tr><td><code>fallback</code></td><td>boolean</td><td>False</td><td>Search <code>justfile</code> in parent directory if the first recipe on the command line is not found.</td></tr>
-<tr><td><code>ignore-comments</code></td><td>boolean</td><td>False</td><td>Ignore recipe lines beginning with <code>#</code>.</td></tr>
-<tr><td><code>positional-arguments</code></td><td>boolean</td><td>False</td><td>Pass positional arguments.</td></tr>
+<tr><td><code>allow-duplicate-recipes</code></td><td>boolean</td><td><code>false</code></td><td>Allow recipes appearing later in a <code>justfile</code> to override earlier recipes with the same name.</td></tr>
+<tr><td><code>dotenv-load</code></td><td>boolean</td><td><code>false</code></td><td>Load a <code>.env</code> file, if present.</td></tr>
+<tr><td><code>export</code></td><td>boolean</td><td><code>false</code></td><td>Export all variables as environment variables.</td></tr>
+<tr><td><code>fallback</code></td><td>boolean</td><td><code>false</code></td><td>Search <code>justfile</code> in parent directory if the first recipe on the command line is not found.</td></tr>
+<tr><td><code>ignore-comments</code></td><td>boolean</td><td><code>false</code></td><td>Ignore recipe lines beginning with <code>#</code>.</td></tr>
+<tr><td><code>positional-arguments</code></td><td>boolean</td><td><code>false</code></td><td>Pass positional arguments.</td></tr>
 <tr><td><code>shell</code></td><td><code>[COMMAND, ARGS…]</code></td><td>-</td><td>Set the command used to invoke recipes and evaluate backticks.</td></tr>
 <tr><td><code>tempdir</code></td><td>string</td><td>-</td><td>Create temporary directories in <code>tempdir</code> instead of the system default temporary directory.</td></tr>
-<tr><td><code>windows-powershell</code></td><td>boolean</td><td>False</td><td>Use PowerShell on Windows as default shell. (Deprecated. Use <code>windows-shell</code> instead.</td></tr>
+<tr><td><code>windows-powershell</code></td><td>boolean</td><td><code>false</code></td><td>Use PowerShell on Windows as default shell. (Deprecated. Use <code>windows-shell</code> instead.</td></tr>
 <tr><td><code>windows-shell</code></td><td><code>[COMMAND, ARGS…]</code></td><td>-</td><td>Set the command used to invoke recipes and evaluate backticks.</td></tr>
 </tbody></table>
 </div>
@@ -760,7 +792,7 @@ Available recipes:
     test # test stuff
 </code></pre>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="dotenv-integration"><a class="header" href="#dotenv-integration">Dotenv Integration</a></h3>
-<p>If <a href="chapter_24.html#dotenv-load"><code>dotenv-load</code></a> is set, <code>just</code> will load environment variables from a file named <code>.env</code>. This file can be located in the same directory as your <code>justfile</code> or in a parent directory. These variables are environment variables, not <code>just</code> variables, and so must be accessed using <code>$VARIABLE_NAME</code> in recipes and backticks.</p>
+<p>If <a href="chapter_25.html#dotenv-load"><code>dotenv-load</code></a> is set, <code>just</code> will load environment variables from a file named <code>.env</code>. This file can be located in the same directory as your <code>justfile</code> or in a parent directory. These variables are environment variables, not <code>just</code> variables, and so must be accessed using <code>$VARIABLE_NAME</code> in recipes and backticks.</p>
 <p>For example, if your <code>.env</code> file contains:</p>
 <pre><code class="language-sh"># a comment, will be ignored
 DATABASE_ADDRESS=localhost:6379
@@ -922,16 +954,28 @@ test:
 </ul>
 <h4 id="invocation-directory"><a class="header" href="#invocation-directory">Invocation Directory</a></h4>
 <ul>
-<li><code>invocation_directory()</code> - Retrieves the absolute path to the current directory when <code>just</code> was invoked, before  <code>just</code> changed it (chdir’d) prior to executing commands.</li>
+<li><code>invocation_directory()</code> - Retrieves the absolute path to the current
+directory when <code>just</code> was invoked, before  <code>just</code> changed it (chdir’d) prior
+to executing commands. On Windows, <code>invocation_directory()</code> uses <code>cygpath</code> to
+convert the invocation directory to a Cygwin-compatible <code>/</code>-separated path.
+Use <code>invocation_directory_native()</code> to return the verbatim invocation
+directory on all platforms.</li>
 </ul>
-<p>For example, to call <code>rustfmt</code> on files just under the “current directory” (from the user/invoker’s perspective), use the following rule:</p>
+<p>For example, to call <code>rustfmt</code> on files just under the “current directory”
+(from the user/invoker’s perspective), use the following rule:</p>
 <pre><code class="language-just">rustfmt:
   find {{invocation_directory()}} -name \*.rs -exec rustfmt {} \;
 </code></pre>
-<p>Alternatively, if your command needs to be run from the current directory, you could use (e.g.):</p>
+<p>Alternatively, if your command needs to be run from the current directory, you
+could use (e.g.):</p>
 <pre><code class="language-just">build:
   cd {{invocation_directory()}}; ./some_script_that_needs_to_be_run_from_here
 </code></pre>
+<ul>
+<li><code>invocation_directory_native()</code> - Retrieves the absolute path to the current
+directory when <code>just</code> was invoked, before  <code>just</code> changed it (chdir’d) prior
+to executing commands.</li>
+</ul>
 <h4 id="justfile-and-justfile-directory"><a class="header" href="#justfile-and-justfile-directory">Justfile and Justfile Directory</a></h4>
 <ul>
 <li>
@@ -1019,10 +1063,22 @@ The executable is at: /bin/just
 <tr><td><code>[no-exit-message]</code></td><td>Don’t print an error message if recipe fails.</td></tr>
 <tr><td><code>[linux]</code></td><td>Enable recipe on Linux.</td></tr>
 <tr><td><code>[macos]</code></td><td>Enable recipe on MacOS.</td></tr>
-<tr><td><code>[unix]</code></td><td>Enable recipe on Unixes.</td></tr>
+<tr><td><code>[unix]</code></td><td>Enable recipe on Unixes. (Includes MacOS).</td></tr>
 <tr><td><code>[windows]</code></td><td>Enable recipe on Windows.</td></tr>
+<tr><td><code>[private]</code></td><td>See <a href="chapter_49.html">Private Recipes</a>.</td></tr>
 </tbody></table>
 </div>
+<p>A recipe can have multiple attributes, either on multiple lines:</p>
+<pre><code class="language-just">[no-cd]
+[private]
+foo:
+    echo &quot;foo&quot;
+</code></pre>
+<p>Or separated by commas on a single line:</p>
+<pre><code class="language-just">[no-cd, private]
+foo:
+    echo &quot;foo&quot;
+</code></pre>
 <h4 id="enabling-and-disabling-recipes"><a class="header" href="#enabling-and-disabling-recipes">Enabling and Disabling Recipes</a></h4>
 <p>The <code>[linux]</code>, <code>[macos]</code>, <code>[unix]</code>, and <code>[windows]</code> attributes are
 configuration attributes. By default, recipes are always enabled. A recipe with
@@ -1071,7 +1127,7 @@ stuff := ```
     echo bar
   ```
 </code></pre>
-<p>See the <a href="chapter_28.html">Strings</a> section for details on unindenting.</p>
+<p>See the <a href="chapter_29.html">Strings</a> section for details on unindenting.</p>
 <p>Backticks may not start with <code>#!</code>. This syntax is reserved for a future upgrade.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="conditional-expressions"><a class="header" href="#conditional-expressions">Conditional Expressions</a></h3>
 <p><code>if</code>/<code>else</code> expressions evaluate different branches depending on if two expressions evaluate to the same value:</p>
@@ -1187,7 +1243,7 @@ BAR := `echo hello $WORLD`
 a $A $B=`echo $A`:
   echo $A $B
 </code></pre>
-<p>When <a href="chapter_24.html#export">export</a> is set, all <code>just</code> variables are exported as environment variables.</p>
+<p>When <a href="chapter_25.html#export">export</a> is set, all <code>just</code> variables are exported as environment variables.</p>
 <h4 id="getting-environment-variables-from-the-environment"><a class="header" href="#getting-environment-variables-from-the-environment">Getting Environment Variables from the environment</a></h4>
 <p>Environment variables from the environment are passed automatically to the recipes.</p>
 <pre><code class="language-just">print_home_folder:
@@ -1197,10 +1253,10 @@ a $A $B=`echo $A`:
 HOME is '/home/myuser'
 </code></pre>
 <h4 id="loading-environment-variables-from-a-env-file"><a class="header" href="#loading-environment-variables-from-a-env-file">Loading Environment Variables from a <code>.env</code> File</a></h4>
-<p><code>just</code> will load environment variables from a <code>.env</code> file if <a href="chapter_24.html#dotenv-load">dotenv-load</a> is set. The variables in the file will be available as environment variables to the recipes. See <a href="chapter_26.html">dotenv-integration</a> for more information.</p>
+<p><code>just</code> will load environment variables from a <code>.env</code> file if <a href="chapter_25.html#dotenv-load">dotenv-load</a> is set. The variables in the file will be available as environment variables to the recipes. See <a href="chapter_27.html">dotenv-integration</a> for more information.</p>
 <h4 id="setting-just-variables-from-environment-variables"><a class="header" href="#setting-just-variables-from-environment-variables">Setting <code>just</code> Variables from Environment Variables</a></h4>
 <p>Environment variables can be propagated to <code>just</code> variables using the functions <code>env_var()</code> and <code>env_var_or_default()</code>.
-See <a href="chapter_30.html#environment-variables">environment-variables</a>.</p>
+See <a href="chapter_31.html#environment-variables">environment-variables</a>.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="recipe-parameters"><a class="header" href="#recipe-parameters">Recipe Parameters</a></h3>
 <p>Recipes may have parameters. Here recipe <code>build</code> has a parameter called <code>target</code>:</p>
 <pre><code class="language-just">build target:
@@ -1380,8 +1436,8 @@ Hello from python!
 Greetings from JavaScript!
 Larry Wall says Hi!
 Yo from a shell script!
-Hello from ruby!
 Hola from a nushell script!
+Hello from ruby!
 </code></pre>
 <p>On Unix-like operating systems, including Linux and MacOS, shebang recipes are
 executed by saving the recipe body to a file in a temporary directory, marking
@@ -1663,6 +1719,42 @@ fatal: not a git repository (or any of the parent directories): .git
 $ just foo/build
 $ just foo/
 </code></pre>
+<p>Additional recipes after the first are sought in the same <code>justfile</code>. For
+example, the following are both equivalent:</p>
+<pre><code class="language-sh">$ just foo/a b
+$ (cd foo &amp;&amp; just a b)
+</code></pre>
+<p>And will both invoke recipes <code>a</code> and <code>b</code> in <code>foo/justfile</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="include-directives"><a class="header" href="#include-directives">Include Directives</a></h3>
+<p>The <code>!include</code> directive, currently unstable, can be used to include the
+verbatim text of another file.</p>
+<p>If you have the following <code>justfile</code>:</p>
+<pre><code class="language-mf">!include foo/bar.just
+
+a: b
+  @echo A
+
+</code></pre>
+<p>And the following text in <code>foo/bar.just</code>:</p>
+<pre><code class="language-mf">b:
+  @echo B
+</code></pre>
+<p><code>foo/bar.just</code> will be included in <code>justfile</code> and recipe <code>b</code> will be defined:</p>
+<pre><code class="language-sh">$ just --unstable b
+B
+$ just --unstable a
+B
+A
+</code></pre>
+<p>The <code>!include</code> directive path can be absolute or relative to the location of
+the justfile containing it. <code>!include</code> directives must appear at the beginning
+of a line.</p>
+<p>Justfiles are insensitive to order, so included files can reference variables
+and recipes defined after the <code>!include</code> directive.</p>
+<p><code>!include</code> directives are only processed before the first non-blank,
+non-comment line.</p>
+<p>Included files can themselves contain <code>!include</code> directives, which are
+processed recursively.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="hiding-justfiles"><a class="header" href="#hiding-justfiles">Hiding <code>justfile</code>s</a></h3>
 <p><code>just</code> looks for <code>justfile</code>s named <code>justfile</code> and <code>.justfile</code>, which can be used to keep a <code>justfile</code> hidden.</p>
 <div style="break-before: page; page-break-before: always;"></div><h3 id="just-scripts"><a class="header" href="#just-scripts">Just Scripts</a></h3>
@@ -1686,15 +1778,41 @@ foo
 default:
   echo foo
 </code></pre>
-<div style="break-before: page; page-break-before: always;"></div><h3 id="dumping-justfiles-as-json"><a class="header" href="#dumping-justfiles-as-json">Dumping <code>justfile</code>s as JSON</a></h3>
-<p>The <code>--dump</code> command can be used with <code>--dump-format json</code> to print a JSON representation of a <code>justfile</code>. The JSON format is currently unstable, so the <code>--unstable</code> flag is required.</p>
-<div style="break-before: page; page-break-before: always;"></div><h3 id="falling-back-to-parent-justfiles"><a class="header" href="#falling-back-to-parent-justfiles">Falling back to parent <code>justfile</code>s</a></h3>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="formatting-and-dumping-justfiles"><a class="header" href="#formatting-and-dumping-justfiles">Formatting and dumping <code>justfile</code>s</a></h3>
+<p>Each <code>justfile</code> has a canonical formatting with respect to whitespace and
+newlines.</p>
+<p>You can overwrite the current justfile with a canonically-formatted version
+using the currently-unstable <code>--fmt</code> flag:</p>
+<pre><code class="language-sh">$ cat justfile
+# A lot of blank lines
+
+
+
+
+
+some-recipe:
+  echo &quot;foo&quot;
+$ just --fmt --unstable
+$ cat justfile
+# A lot of blank lines
+
+some-recipe:
+    echo &quot;foo&quot;
+</code></pre>
+<p>Invoking <code>just --fmt --check --unstable</code> runs <code>--fmt</code> in check mode. Instead of
+overwriting the <code>justfile</code>, <code>just</code> will exit with an exit code of 0 if it is
+formatted correctly, and will exit with 1 and print a diff if it is not.</p>
+<p>You can use the <code>--dump</code> command to output a formatted version of the
+<code>justfile</code> to stdout:</p>
+<pre><code class="language-sh">$ just --dump &gt; formatted-justfile
+</code></pre>
+<p>The <code>--dump</code> command can be used with <code>--dump-format json</code> to print a JSON
+representation of a <code>justfile</code>.</p>
+<div style="break-before: page; page-break-before: always;"></div><h3 id="fallback-to-parent-justfiles"><a class="header" href="#fallback-to-parent-justfiles">Fallback to parent <code>justfile</code>s</a></h3>
 <p>If a recipe is not found in a <code>justfile</code> and the <code>fallback</code> setting is set,
 <code>just</code> will look for <code>justfile</code>s in the parent directory and up, until it
 reaches the root directory. <code>just</code> will stop after it reaches a <code>justfile</code> in
 which the <code>fallback</code> setting is <code>false</code> or unset.</p>
-<p>This feature is currently unstable, and so must be enabled with the
-<code>--unstable</code> flag.</p>
 <p>As an example, suppose the current directory contains this <code>justfile</code>:</p>
 <pre><code class="language-just">set fallback
 foo:
@@ -1704,7 +1822,7 @@ foo:
 <pre><code class="language-just">bar:
   echo bar
 </code></pre>
-<pre><code class="language-sh">$ just --unstable bar
+<pre><code class="language-sh">$ just bar
 Trying ../justfile
 echo bar
 bar
@@ -1822,7 +1940,7 @@ done
 <li><a href="https://en.wikipedia.org/wiki/Make_(software)">make</a>: The Unix build tool that inspired <code>just</code>. There are a few different modern day descendents of the original <code>make</code>, including <a href="https://www.freebsd.org/cgi/man.cgi?make(1)">FreeBSD Make</a> and <a href="https://www.gnu.org/software/make/">GNU Make</a>.</li>
 <li><a href="https://github.com/go-task/task">task</a>: A YAML-based command runner written in Go.</li>
 <li><a href="https://github.com/egoist/maid">maid</a>: A Markdown-based command runner written in JavaScript.</li>
-<li><a href="https://github.com/microsoft/just">microsoft/just</a>: A JavasScript-based command runner written in JavaScript.</li>
+<li><a href="https://github.com/microsoft/just">microsoft/just</a>: A JavaScript-based command runner written in JavaScript.</li>
 <li><a href="https://github.com/sagiegurari/cargo-make">cargo-make</a>: A command runner for Rust projects.</li>
 <li><a href="https://github.com/tj/mmake">mmake</a>: A wrapper around <code>make</code> with a number of improvements, including remote includes.</li>
 <li><a href="https://github.com/tj/robo">robo</a>: A YAML-based command runner written in Go.</li>
@@ -1897,7 +2015,7 @@ make: `test' is up to date.
 </li>
 </ul>
 <p>Even for small, personal projects it’s nice to be able to remember commands by name instead of ^Reverse searching your shell history, and it’s a huge boon to be able to go into an old project written in a random language with a mysterious build system and know that all the commands you need to do whatever you need to do are in the <code>justfile</code>, and that if you type <code>just</code> something useful (or at least interesting!) will probably happen.</p>
-<p>For ideas for recipes, check out <a href="https://github.com/casey/just/blob/master/justfile">this project’s <code>justfile</code></a>, or some of the <code>justfile</code>s <a href="https://github.com/search?o=desc&amp;q=filename%3Ajustfile&amp;s=indexed&amp;type=Code">out in the wild</a>.</p>
+<p>For ideas for recipes, check out <a href="https://github.com/casey/just/blob/master/justfile">this project’s <code>justfile</code></a>, or some of the <code>justfile</code>s <a href="https://github.com/search?q=path%3A**%2Fjustfile&amp;type=code">out in the wild</a>.</p>
 <p>Anyways, I think that’s about it for this incredibly long-winded README.</p>
 <p>I hope you enjoy using <code>just</code> and find great success and satisfaction in all your computational endeavors!</p>
 <p>😸</p>
@@ -1943,5 +2061,6 @@ make: `test' is up to date.
         });
         </script>
 
+    </div>
     </body>
 </html>
